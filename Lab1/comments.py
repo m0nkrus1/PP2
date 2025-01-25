@@ -5,6 +5,7 @@ print("Hello, World!")
 print("Cheers, Mate!")
 
 #Multiple comments
+# Updated the comment for testing purposes
 
 #This is a comment
 #written in
