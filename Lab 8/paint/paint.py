@@ -9,22 +9,22 @@ def main():
     # Drawing variables
     radius = 15
     drawing = False
-    shape = 'line'  # 'line', 'rectangle', 'circle', 'eraser'
+    shape = 'line'
     start_pos = (0, 0)
-    color = (0, 0, 255)  # Default blue
+    color = (0, 0, 255)
     points = []
-    eraser_color = (0, 0, 0)  # Background color for eraser
+    eraser_color = (0, 0, 0)
     
     # Colors palette
     colors = [
-        (255, 0, 0),    # Red
-        (0, 255, 0),    # Green
-        (0, 0, 255),   # Blue
-        (255, 255, 0), # Yellow
-        (255, 0, 255), # Magenta
-        (0, 255, 255), # Cyan
-        (255, 255, 255), # White
-        (0, 0, 0)      # Black
+        (255, 0, 0),
+        (0, 255, 0),
+        (0, 0, 255),
+        (255, 255, 0),
+        (255, 0, 255),
+        (0, 255, 255),
+        (255, 255, 255),
+        (0, 0, 0)
     ]
     
     while True:
@@ -56,7 +56,7 @@ def main():
                 # Color selection with number keys
                 for i in range(min(9, len(colors) + 1)):
                     if event.key == getattr(pygame, f"K_{i}"):
-                        if i == 0:  # K_0 is the 9th color (since K_1 is first)
+                        if i == 0:
                             if len(colors) > 8:
                                 color = colors[8]
                         elif i - 1 < len(colors):
@@ -64,14 +64,12 @@ def main():
             
             # Mouse events
             if event.type == pygame.MOUSEBUTTONDOWN:
-                if event.button == 1:  # Left click
+                if event.button == 1:
                     drawing = True
                     start_pos = event.pos
                     if shape == 'line' or shape == 'eraser':
                         points.append(event.pos)
-                
-                # Adjust radius
-                elif event.button == 3:  # Right click
+                elif event.button == 3:
                     if pressed[pygame.K_LSHIFT] or pressed[pygame.K_RSHIFT]:
                         radius = min(200, radius + 5)
                     else:
@@ -93,10 +91,7 @@ def main():
             
             if event.type == pygame.MOUSEMOTION:
                 if drawing:
-                    if shape == 'line':
-                        points.append(event.pos)
-                        points = points[-512:]  # Limit the number of points
-                    elif shape == 'eraser':
+                    if shape == 'line' or shape == 'eraser':
                         points.append(event.pos)
                         points = points[-512:]
         
